@@ -5,48 +5,30 @@
 
 // But instead we're going to implement it from scratch:
 var getElementsByClassName = function(className) {
-  var array = [];
-
-  var domBody = document.getElementsByTagName('body');
-
-  // if(domBody.length === 0) {
-
-  // } else {
-    
-  // }
-  var run = function(element) {
-    
-    if (element[0].classList.length > 0) {
-      for (var j = 0; j < element[0].classList.length; j++) {
-        if (element[0].classList[j] === className) {
-          array.push(element[0]);
-        }
-      }
-
-
-    }
-    if (element[0].children.length > 0) {
-      for (i = 0; i < element[0].children.length; i++) {
-        run(element[0].children[i].children);
-      }
-    }
-    return array; 
-
    
-  
+  var result = [];
 
+  var test = function(element) {
+    if(element.classList && element.classList.contains(className)) {
+      result.push(element);
+    }
+
+    if(element.childNodes) {
+      element.childNodes.forEach(function(child) {
+        test(child);
+      })      
+    }
+
+  }
+  
+  test(document.body);
+
+  return result; 
 
 
 
   // input: className 
 
-  // iterating thru the document body 
-  // 
-
-  // output: all elements with className 
-  };
-  
-  run(domBody);
 
 };
 
